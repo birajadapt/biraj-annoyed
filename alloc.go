@@ -81,6 +81,8 @@ func (app *App) fetchRunningAllocs() (map[string]*api.Allocation, error) {
 // It creates a config file on the disk which vector is _live_ watching and reloading
 // whenever it changes.
 func (app *App) generateConfig(allocs map[string]*api.Allocation) error {
+	app.log.Debug("biraj generateConfig(): vectorConfigDir is ", app.opts.vectorConfigDir)
+
 	// Create a config dir to store templates.
 	if err := os.MkdirAll(app.opts.vectorConfigDir, os.ModePerm); err != nil {
 		return fmt.Errorf("error creating dir %s: %v", app.opts.vectorConfigDir, err)
