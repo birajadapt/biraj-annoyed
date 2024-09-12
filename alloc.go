@@ -25,6 +25,7 @@ func (app *App) fetchRunningAllocs() (map[string]*api.Allocation, error) {
 	query := &api.QueryOptions{
 		Params:    params,
 		Namespace: "*",
+		Filter:    "JobID matches \"job-.+\"",
 	}
 
 	// Query list of allocs.
