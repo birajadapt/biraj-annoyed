@@ -4,7 +4,8 @@ set -e
 
 echo "stop old deployments"
 nomad job stop -purge vector || true
-nomad system gc
+# commenting this out because the token doesn't have permission yet
+# nomad system gc
 
 echo "build binary"
 make build
