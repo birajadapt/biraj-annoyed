@@ -18,15 +18,17 @@ func (app *App) fetchRunningAllocs() (map[string]*api.Allocation, error) {
 	allocs := make(map[string]*api.Allocation, 0)
 
 	// Only fetch the allocations running on this noe.
-	params := map[string]string{}
-	params["filter"] = fmt.Sprintf("NodeID==\"%s\"", app.nodeID)
+	// params := map[string]string{} // biraj
+	// params["filter"] = fmt.Sprintf("NodeID==\"%s\"", app.nodeID) // biraj
 
 	// Prepare params for listing alloc.
 	query := &api.QueryOptions{
-		Params:    params,
+		// Params:    params, // biraj
 		Namespace: "*",
-		Filter:    "JobID matches \"job-.+\"",
+		Filter:    fmt.Sprintf("JobID matches \"job-.+\" and NodeID==\"%s\"", app.nodeID),
 	}
+
+	app.log.Debug("biraj get allocs with filter", "filter", query.Filter)
 
 	// Query list of allocs.
 	currentAllocs, meta, err := app.nomadClient.Allocations().List(query)
