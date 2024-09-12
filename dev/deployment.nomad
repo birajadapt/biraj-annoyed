@@ -117,6 +117,10 @@ EOH
         left_delimiter  = "[["
         right_delimiter = "]]"
       }
+
+      env {
+        NOMAD_TOKEN = "BIRAJ"
+      }
     }
 
     task "await-config-generation" {
