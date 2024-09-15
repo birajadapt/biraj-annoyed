@@ -5,8 +5,10 @@ type = "loki"
 inputs = ["transform_nomad_alloc_*"] 
 
 # loki server details
-endpoint = "https://logs-prod-006.grafana.net"
-
+endpoint = "GRAFANA_HOSTED_LOKI_URL"
+auth.strategy = "basic"
+auth.user = "USER"
+auth.password = "GRAFANA_API_KEY"
 
 # Encoding for the logs
 encoding.codec = "json"
