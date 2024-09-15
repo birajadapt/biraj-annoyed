@@ -2,7 +2,7 @@
 type = "loki"
 
 # see vector.toml.tpl file for details
-inputs = ["transforms.transform_nomad_alloc_*"] 
+inputs = ["transform_nomad_alloc_*"] 
 
 # loki server details
 endpoint = "https://logs-prod-006.grafana.net"
