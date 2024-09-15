@@ -20,11 +20,11 @@ source = '''
 [transforms.route_logs_{{$value.Key}}]
 type = "route"
 inputs = ["transform_{{$value.Key}}"]
-route.stdout = 'contains(file, "stdout")'
-route.stderr = 'contains(file, "stderr")'
+route.stdout = 'contains(.file, "stdout")'
+route.stderr = 'contains(.file, "stderr")'
 
 # sink for stdout
-[sinks.file_stdou_{{$value.Key}}]
+[sinks.file_stdout_{{$value.Key}}]
 type = "file"
 inputs = ["route_logs_{{$value.Key}}.stdout"]
 path = "/root/birajtest/file-sink/{{$value.Key}}.stdout.log"
