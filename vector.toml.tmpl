@@ -19,31 +19,4 @@ source = '''
 .nomad.job_meta_function_id = "{{$value.JobMetaFunctionId}}"
 .nomad.job_meta_user_id = "{{$value.JobMetaUserId}}"
 '''
-
-[transforms.route_logs_{{$value.Key}}]
-type = "route"
-inputs = ["transform_{{$value.Key}}"]
-route.stdout = 'contains(to_string(.file) ?? "to_string() failed", "stdout")'
-route.stderr = 'contains(to_string(.file) ?? "to_string() failed", "stderr")'
-
-# sink for stdout
-[sinks.file_stdout_{{$value.Key}}]
-type = "file"
-inputs = ["route_logs_{{$value.Key}}.stdout"]
-path = "/root/birajtest/file-sink/{{$value.Key}}.stdout.log"
-encoding.codec = "json"
-
-# sink for stderr
-[sinks.file_stderr_{{$value.Key}}]
-type = "file"
-inputs = ["route_logs_{{$value.Key}}.stderr"]
-path = "/root/birajtest/file-sink/{{$value.Key}}.stderr.log"
-encoding.codec = "json"
-
-# sink for unmatched
-[sinks.file_unmatched_{{$value.Key}}]
-type = "file"
-inputs = ["route_logs_{{$value.Key}}._unmatched"]
-path = "/root/birajtest/file-sink/{{$value.Key}}.unmatched.log"
-encoding.codec = "json"
 {{ end}}
