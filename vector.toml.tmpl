@@ -16,9 +16,24 @@ source = '''
 .nomad.task_name = "{{$value.Task}}"
 .nomad.alloc_id = "{{$value.ID}}"
 '''
-[sinks.biraj_file_sink_{{$value.Key}}]
-type = "file"
+
+[transforms.route_logs_{{$value.Key}}]
+type = "route"
 inputs = ["transform_{{$value.Key}}"]
+route.stdout = 'contains(file, "stdout")'
+route.stderr = 'contains(file, "stderr")'
+
+# sink for stdout
+[sinks.file_stdou_{{$value.Key}}]
+type = "file"
+inputs = ["route_logs_{{$value.Key}}.stdout"]
+path = "/root/birajtest/file-sink/{{$value.Key}}.stdout.log"
 encoding.codec = "json"
-path = "/root/birajtest/file-sink/{{$value.Key}}.json"
+
+# sink for stderr
+[sinks.file_stderr_{{$value.Key}}]
+type = "file"
+inputs = ["route_logs_{{$value.Key}}.stderr"]
+path = "/root/birajtest/file-sink/{{$value.Key}}.stderr.log"
+encoding.codec = "json"
 {{ end}}
