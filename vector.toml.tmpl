@@ -20,8 +20,8 @@ source = '''
 [transforms.route_logs_{{$value.Key}}]
 type = "route"
 inputs = ["transform_{{$value.Key}}"]
-route.stdout = 'contains(.file, "stdout")'
-route.stderr = 'contains(.file, "stderr")'
+route.stdout = 'contains(to_string(.file), "stdout")'
+route.stderr = 'contains(to_string(.file), "stderr")'
 
 # sink for stdout
 [sinks.file_stdout_{{$value.Key}}]
