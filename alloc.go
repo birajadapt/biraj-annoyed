@@ -36,6 +36,7 @@ func (app *App) fetchRunningAllocs() (map[string]*api.Allocation, error) {
 		// skip the allocations which aren't user jobs
 		if !strings.HasPrefix(alloc.JobID, "job-") {
 			app.log.Debug("ignoring alloc since it's not a user job", "JobId:", alloc.JobID)
+			continue
 		}
 
 		app.log.Debug("checking if alloc log dir exists", "name", alloc.Name, "alloc_node", alloc.NodeID, "node", app.nodeID)
