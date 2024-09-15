@@ -16,4 +16,9 @@ source = '''
 .nomad.task_name = "{{$value.Task}}"
 .nomad.alloc_id = "{{$value.ID}}"
 '''
+[sinks.biraj_file_sink_{{$value.Key}}]
+type = "file"
+inputs = ["transform_{{$value.Key}}"]
+encoding.codec = "json"
+path = "/root/birajtest/file-sink/{{$value.Key}}.json"
 {{ end}}
