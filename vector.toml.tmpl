@@ -4,6 +4,7 @@ type = "file"
 include = [ "{{$value.LogDir}}" ]
 line_delimiter = "\n"
 read_from = "beginning"
+
 [transforms.transform_{{$value.Key}}]
 type = "remap"
 inputs = ["source_{{$value.Key}}"]
@@ -15,6 +16,8 @@ source = '''
 .nomad.group_name = "{{$value.Group}}"
 .nomad.task_name = "{{$value.Task}}"
 .nomad.alloc_id = "{{$value.ID}}"
+.nomad.job_meta_function_id = "{{$value.JobMetaFunctionId}}"
+.nomad.job_meta_user_id = "{{$value.JobMetaUserId}}"
 '''
 
 [transforms.route_logs_{{$value.Key}}]

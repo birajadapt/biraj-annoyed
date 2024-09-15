@@ -31,14 +31,16 @@ type App struct {
 }
 
 type AllocMeta struct {
-	Key       string
-	ID        string
-	LogDir    string
-	Job       string
-	Namespace string
-	Task      string
-	Node      string
-	Group     string
+	Key               string
+	ID                string
+	LogDir            string
+	Job               string
+	Namespace         string
+	Task              string
+	Node              string
+	Group             string
+	JobMetaFunctionId string
+	JobMetaUserId     string
 }
 
 // Start initialises the subscription stream in background and waits
